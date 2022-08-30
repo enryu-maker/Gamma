@@ -67,7 +67,7 @@ export default function SettingPages({
                     keyExtractor={(item) => item.id}
                     renderItem={({ item, index }) => {
                         return (
-                            <InfoItem key={index} title={item.label} show={item.label === value} onPress={() => {
+                            <InfoItem title={item.label} show={item.label === value} onPress={() => {
                                 if (data.name === "Language") {
                                     dispatch(Language(item.value))
                                 }

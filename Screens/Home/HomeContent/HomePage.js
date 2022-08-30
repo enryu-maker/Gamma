@@ -45,7 +45,6 @@ export default function HomePage({
                 "EXTRA_PARTIAL_RESULTS": true
             });
         }
-        console.log(d)
         setIsRecord(!isRecord);
         d = {}
     };
@@ -60,7 +59,6 @@ export default function HomePage({
             Voice.destroy().then(Voice.removeAllListeners);
         };
     }, [])
-    console.log("text==>" + text)
     return (
         <View style={{
             flex: 1,
