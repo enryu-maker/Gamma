@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import { useTranslation } from 'react-i18next';
 export const Init = () => {
     return async dispatch => {
         let token = await AsyncStorage.getItem('token');

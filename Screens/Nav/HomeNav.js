@@ -3,16 +3,14 @@ import React from 'react'
 import { COLORS } from '../../Theme/Theme'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Home from '../Home/Home';
 import BottomTab from './BottomTab';
 import SettingPages from '../Home/SettingPages/SettingPages';
 import HomePage from '../Home/HomeContent/HomePage';
-
 export default function HomeNav() {
     const Stack = createNativeStackNavigator()
     return (
         <View style={{
-            flex:1,
+            flex: 1,
             backgroundColor: COLORS.background
         }}>
             <NavigationContainer>

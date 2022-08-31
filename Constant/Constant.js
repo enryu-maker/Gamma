@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { IMAGE } from "../Theme/Image";
 import { COLORS } from "../Theme/Theme";
-
+import { useTranslation } from 'react-i18next';
 export const Gamma = [
     {
         id:1,
@@ -43,12 +43,14 @@ export const settingData = [
         name:'Language',
         data:[
             {
+                code:"en",
                 label:"English",
                 value:"English"
             },
             {
-                label:"French",
-                value:"French"
+                code:"fr",
+                label:"Français",
+                value:"Français"
 
             }
         ],
@@ -71,3 +73,7 @@ export const settingData = [
 
     }
 ]
+// export function translate(msg){
+//     const { t, i18n } = useTranslation();
+//     return t(msg);
+// }

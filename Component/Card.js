@@ -2,12 +2,14 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import { COLORS, SIZES, FONTS } from '../Theme/Theme'
 import CircleButton from './CircleButton'
+import { useTranslation } from 'react-i18next'
 
 export default function Card({
     name,
     diff,
     onPress
 }) {
+    const { t } = useTranslation();
     return (
         <View style={{
             height: 120,
@@ -36,7 +38,7 @@ export default function Card({
                 justifyContent:"center",
                 color:COLORS.text
             }}>
-                Difficulty: <View style={{
+                {t('Difficulty')}: <View style={{
                     height:10,
                     width:60,
                     backgroundColor:diff,

@@ -9,7 +9,7 @@ export default function Course() {
       flex:1,
       backgroundColor:COLORS.background
     }}>
-      <Header title={"Courses"}/>
+      <Header title={"Course"}/>
     </View>
   )
 }

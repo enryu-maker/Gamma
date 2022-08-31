@@ -5,18 +5,21 @@ import Header from '../../../Component/Header'
 import { IMAGE } from '../../../Theme/Image'
 import Voice from '@react-native-voice/voice';
 import TextCard from '../../../Component/TextCard'
+import { useTranslation } from 'react-i18next'
+
 export default function HomePage({
     navigation,
     route
 }) {
+    const {t}  =useTranslation()
     const [data, setData] = React.useState({})
     const [isRecord, setIsRecord] = React.useState(false);
     const [text, setText] = React.useState('');
     const [textList, setTextList] = React.useState([]);
     const buttonLabel = isRecord ? 'Stop' : 'Start';
     const startLabel = isRecord
-        ? 'Listening...'
-        : 'Press Start Button';
+        ? t('Listening...')
+        : t('Press Start Button');
     const _onSpeechStart = () => {
         console.log("start")
 
@@ -139,7 +142,7 @@ export default function HomePage({
                         ...FONTS.h3,
                         color:COLORS.text
                     }}>
-                        {buttonLabel}
+                        {t(buttonLabel)}
                     </Text>
                 </TouchableOpacity>
             </View>

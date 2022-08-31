@@ -1,4 +1,4 @@
-import { View, Text,Image } from 'react-native'
+import { View, Text, Image } from 'react-native'
 import React from 'react'
 import {
     createBottomTabNavigator,
@@ -9,7 +9,11 @@ import Course from '../Home/Course';
 import Setting from '../Home/Setting';
 import { COLORS, FONTS, SIZES } from '../../Theme/Theme';
 import { IMAGE } from '../../Theme/Image';
+import { useTranslation } from 'react-i18next'
+
 export default function BottomTab() {
+    const { t } = useTranslation();
+
     const BottomTab = createBottomTabNavigator();
     return (
         <>
@@ -21,23 +25,23 @@ export default function BottomTab() {
                     tabBarIcon: ({ focused, color, size }) => {
                         let iconName;
                         let iconColor;
-                        if (route.name === 'Home') {
+                        if (route.name === t('Home')) {
                             iconName = focused ? IMAGE.home : IMAGE.home
                             iconColor = focused ? COLORS.purple : COLORS.text
                             // iconweight = focused ? "700" : null
 
-                        } else if (route.name === 'Settings') {
+                        } else if (route.name === t('Setting')) {
                             iconName = focused ? IMAGE.setting : IMAGE.setting;
                             iconColor = focused ? COLORS.purple : COLORS.text
                             // iconweight = focused ? "700" : null
 
 
-                        } else if (route.name === 'Assesment') {
+                        } else if (route.name === t('Assesment')) {
                             iconName = focused ? IMAGE.test : IMAGE.test
                             iconColor = focused ? COLORS.purple : COLORS.text
                             // iconweight = focused ? "700" : null
                         }
-                        else if (route.name === 'Course') {
+                        else if (route.name === t('Course')) {
                             iconName = focused ? IMAGE.course : IMAGE.course
                             iconColor = focused ? COLORS.purple : COLORS.text
                             // iconweight = focused ? "700" : null
@@ -78,10 +82,10 @@ export default function BottomTab() {
                     tabBarActiveTintColor: COLORS.background,
                     tabBarInactiveTintColor: COLORS.text,
                 })}>
-                <BottomTab.Screen name="Home" component={Home} />
-                <BottomTab.Screen name="Assesment" component={Assesment} />
-                <BottomTab.Screen name="Course" component={Course} />
-                <BottomTab.Screen name="Settings" component={Setting} /> 
+                <BottomTab.Screen name={t("Home")} component={Home} />
+                <BottomTab.Screen name={t("Assesment")} component={Assesment} />
+                <BottomTab.Screen name={t("Course")} component={Course} />
+                <BottomTab.Screen name={t("Setting")} component={Setting} />
             </BottomTab.Navigator>
         </>
     )

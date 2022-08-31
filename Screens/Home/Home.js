@@ -5,10 +5,12 @@ import Header from '../../Component/Header'
 import { COLORS } from '../../Theme/Theme'
 import { IMAGE } from '../../Theme/Image'
 import { Gamma } from '../../Constant/Constant'
+import { useTranslation } from 'react-i18next'
 
 export default function Home({
   navigation
 }) {
+  const {t} = useTranslation()
   return (
     <View style={{
       flex:1,
@@ -27,9 +29,9 @@ export default function Home({
           <BigCard 
           img={item.img} 
           name={item.name}
-          L1={item.L1}
-          L2={item.L2}
-          L3={item.L3}
+          L1={t(item.L1)}
+          L2={t(item.L2)}
+          L3={t(item.L3)}
           onPress={()=>{
             navigation.navigate("homepage",{
               data:item

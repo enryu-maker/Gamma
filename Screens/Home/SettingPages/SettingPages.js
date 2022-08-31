@@ -7,11 +7,16 @@ import InfoItem from '../../../Component/InfoItem'
 import { useDispatch } from 'react-redux'
 import { Language, Theme } from '../../../Store/actions'
 import { useSelector } from 'react-redux'
-
+import { useTranslation } from 'react-i18next'
 export default function SettingPages({
     navigation,
-    route
+    route,
 }) {
+    const { t,i18n } = useTranslation();
+    const setLanguage = code => {
+        return i18n.changeLanguage(code);
+    };
+
     const [data, setData] = React.useState([])
     const [value, setValue] = React.useState([])
     const dispatch = useDispatch()
@@ -67,9 +72,10 @@ export default function SettingPages({
                     keyExtractor={(item) => item.id}
                     renderItem={({ item, index }) => {
                         return (
-                            <InfoItem title={item.label} show={item.label === value} onPress={() => {
+                            <InfoItem title={t(item.label)} show={item.label === value} onPress={() => {
                                 if (data.name === "Language") {
                                     dispatch(Language(item.value))
+                                    setLanguage(item.code)
                                 }
                                 else {
                                     dispatch(Theme(item.value))

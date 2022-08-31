@@ -6,8 +6,10 @@ import {
     Platform
 } from 'react-native';
 import { COLORS, FONTS } from '../Theme/Theme';
+import { useTranslation } from 'react-i18next';
 
-const Header = ({ containerStyle, title, titleStyle, leftComponent, rightComponent,img ,imgstyle}) => {
+const Header = ({ containerStyle, title, titleStyle, leftComponent, rightComponent,img ,imgstyle,props}) => {
+    const {t, i18n} = useTranslation(); 
     return (       
         <View
             style={{
@@ -23,7 +25,7 @@ const Header = ({ containerStyle, title, titleStyle, leftComponent, rightCompone
             }
             {title?
             (<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center',}}>
-            <Text style={{  ...FONTS.h2, ...titleStyle,color:COLORS.text}}>{title}</Text>
+            <Text style={{  ...FONTS.h2, ...titleStyle,color:COLORS.text}}>{t(title)}</Text>
         </View>):(
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                 <Image
