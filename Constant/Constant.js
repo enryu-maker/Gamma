@@ -7,7 +7,7 @@ export const Gamma = [
         id:1,
         name:'Gamma-0',
         img:IMAGE.Gamma1,
-        L1:"AI for Improving Your ",
+        L1:"AI for Improving Your",
         L2:"Grammer",
         L3:"Start Conversation With Zero"
     },
@@ -15,8 +15,8 @@ export const Gamma = [
         id:2,
         name:'Gamma-1',
         img:IMAGE.Gamma2,
-        L1:"AI for Improving Your ",
-        L2:"Conversation Skill",
+        L1:"AI for Improving Your",
+        L2:"Conversation Skills",
         L3:"Start Conversation With One"
     }
 ]

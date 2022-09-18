@@ -100,25 +100,25 @@ export default function HomePage({
                 justifyContent: "space-evenly"
             }}>
                 <Image source={data.img} style={{
-                    height: 250,
-                    width: 250,
+                    height: 200,
+                    width: 200,
                     alignSelf: "center",
                 }} />
-                <Text style={{
+                
+                <View style={{
+                    // marginTop: 15,
+                    height: 350,
+                    width: "88%",
+                    borderRadius: SIZES.padding,
+                    alignSelf: "center",
+                }}>
+                    <Text style={{
                     ...FONTS.h3,
                     alignSelf: "center",
-                    marginTop: -40,
                     color: COLORS.purple
                 }}>
                     {startLabel}
                 </Text>
-                <View style={{
-                    marginTop: 5,
-                    height: 350,
-                    width: "88%",
-                    borderRadius: SIZES.padding,
-                    alignSelf: "center"
-                }}>
                     <FlatList
                         data={textList}
                         keyExtractor={(item) => item.id}
@@ -129,7 +129,7 @@ export default function HomePage({
                         }} />
                 </View>
                 <TouchableOpacity style={{
-                    marginBottom: Platform.OS == "ios" ? 0 : 100
+                    marginBottom: SIZES.height>700? 0 : 165,
                 }} onPress={_onRecordVoice}>
                     <Image source={IMAGE.siri} style={{
                         height: 120,

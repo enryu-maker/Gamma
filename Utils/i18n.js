@@ -3,6 +3,7 @@ import i18n from 'i18next';
 import {initReactI18next} from 'react-i18next';
 import {getLocales} from 'react-native-localize';
 i18n.use(initReactI18next).init({
+  compatibilityJSON: 'v3',
   lng: getLocales()[0].languageCode,
   fallbackLng: 'en',
   resources: {
@@ -21,7 +22,7 @@ i18n.use(initReactI18next).init({
         'Listening':'Listening',
         'Difficulty':'Difficulty',
         'AI for Improving Your':'AI for Improving Your',
-        'Conversation Skill':'Conversation Skill',
+        'Conversation Skills':'Conversation Skills',
         'Start Conversation With One':'Start Conversation With One',
         'Grammer':'Grammer',
         'Start Conversation With Zero':'Start Conversation With Zero',
@@ -46,8 +47,6 @@ i18n.use(initReactI18next).init({
         'Start Conversation With One':'Commencer la conversation avec One',
         'Start Conversation With Zero':'Commencer la conversation avec Zero',
         'Grammer':'Grammaire',
-
-
       },
     }
   },

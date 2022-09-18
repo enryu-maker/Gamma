@@ -13,7 +13,7 @@ export default function BigCard({
 }) {
     return (
         <View style={{
-            height: SIZES.height * 0.60,
+            height: SIZES.height>700?SIZES.height * 0.60:SIZES.height * 0.70,
             width:SIZES.width-30,
             backgroundColor: COLORS.card,
             borderRadius: SIZES.padding,
