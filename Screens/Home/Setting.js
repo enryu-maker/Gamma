@@ -7,6 +7,7 @@ import InfoItem from '../../Component/InfoItem'
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
+import { LogoutAction } from '../../Store/actions'
 export default function Setting() {
   const navigation = useNavigation()
   const dispatch = useDispatch()
@@ -55,7 +56,7 @@ export default function Setting() {
           ...FONTS.h2
         }} 
         onPress={()=>{
-          dispatch(Logout())
+          dispatch(LogoutAction())
         }}
         />
       </View>

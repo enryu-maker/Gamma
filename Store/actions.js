@@ -14,11 +14,11 @@ export const Init = () => {
         }
     }
 }
-export const Login = (token, id) => {
+export const LoginAction = (token, id) => {
     return async dispatch => {
         if (token && id) {
             await AsyncStorage.setItem('token', token);
-            await AsyncStorage.setItem('id', id);
+            await AsyncStorage.setItem('id', id.toString());
             await AsyncStorage.setItem('start', 'true');
         }
         dispatch({
@@ -43,7 +43,7 @@ export const Theme = (value) => {
         })
     }
 }
-export const Logout = () => {
+export const LogoutAction = () => {
     return async dispatch => {
         AsyncStorage.clear()
         dispatch({

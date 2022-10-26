@@ -9,7 +9,7 @@ export default (state = initialState, action) => {
         case 'LOGIN':
             return {
                 ...state,
-                authToken: action.payload,
+                token: action.payload,
             };
         case 'THEME':
             return {

@@ -1,9 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-export const baseURL = 'https://api-nerdtech.herdhelp.com'
+
+export const baseURL = 'http://143.110.191.11'
 let headers = {};
 const axiosIns = axios.create({
-    baseURL: 'https://api-nerdtech.herdhelp.com/',
+    baseURL: 'http://143.110.191.11/',
     headers,
 });
 axiosIns.interceptors.request.use(

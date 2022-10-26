@@ -1,22 +1,89 @@
-import { View, Text, TouchableOpacity, Image } from 'react-native'
+import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native'
 import React from 'react'
-import { COLORS, FONTS } from '../../Theme/Theme'
+import { COLORS, FONTS, SIZES } from '../../Theme/Theme'
 import Header from '../../Component/Header'
 import FormInput from '../../Component/FormInput'
 import { IMAGE } from '../../Theme/Image'
 import TextButton from '../../Component/TextButton'
-
+import { toastConfig } from '../../App'
+import Loader from '../../Component/Loader'
+import Toast from 'react-native-toast-message'
+import utils from '../../Utils/utils'
+import axios from 'axios'
+import { baseURL } from '../../helpers/helpers'
 export default function Register({
     navigation
 }) {
     const [email, setEmail] = React.useState("")
+    const [emailerr, setEmailerrr] = React.useState("")
+
+    const [username, setUsername] = React.useState("")
     const [pass, setPass] = React.useState("")
+    const [passerr, setPasserr] = React.useState("")
+
     const [pass1, setPass1] = React.useState("")
     const [show, setShow] = React.useState(false)
+    const [loading, setLoading] = React.useState(false)
+
+    function isEnabled() {
+        return email != "" && username != "" && pass != "" && pass1 != ""
+    }
+    async function signup() {
+        if (isEnabled()) {
+            setLoading(true);
+            await axios.post(baseURL + '/register/',
+                {
+                    email: email,
+                    username: username,
+                    password: pass,
+                    // password1: pass1,
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                },
+            )
+                .then(response => {
+                    console.log(response)
+                    if (response.status === 201) {
+                        Toast.show({
+                            text1: 'User Registered Successfully',
+                            type: 'success'
+                        });
+                        setLoading(false)
+                    } else {
+                        Toast.show({
+                            text1: 'User Not Registered',
+                            type: 'error'
+                        });
+                        setLoading(false);
+                    }
+                })
+                .catch(error => {
+                    console.log(error)
+                    if (error.response) {
+                        Toast.show({
+                            text1: 'Invalid Email & Password',
+                            type: 'error'
+                        });
+                        setLoading(false);
+                    }
+                });
+        } else {
+            Toast.show({
+                text1: 'Invalid Input',
+                type: 'error'
+            });
+            setLoading(false);
+        }
+    }
     return (
-        <View style={{
-            backgroundColor: COLORS.background
+        <ScrollView style={{
+            flex: 1,
+            backgroundColor: COLORS.background,
         }}>
+            <Loader loading={loading} />
             <Header />
             <View>
                 <Text style={{
@@ -34,12 +101,25 @@ export default function Register({
                 <FormInput
                     value={email}
                     label={"Email"}
+                    errorMsg={emailerr}
                     onChange={(value) => {
+                        utils.validateEmail(value, setEmailerrr)
                         setEmail(value)
                     }}
                     placeholder={"Enter Email"}
                     containerStyle={{
                         marginTop: 25
+                    }}
+                />
+                <FormInput
+                    value={username}
+                    label={"Username"}
+                    onChange={(value) => {
+                        setUsername(value)
+                    }}
+                    placeholder={"Enter Username"}
+                    containerStyle={{
+                        marginTop: 15
                     }}
                 />
                 <FormInput
@@ -49,7 +129,7 @@ export default function Register({
                         setPass(value)
                     }}
                     placeholder={"Enter Password"}
-                    secureTextEntry={show}
+                    secureTextEntry={!show}
                     containerStyle={{
                         marginTop: 15
                     }}
@@ -75,11 +155,14 @@ export default function Register({
                 <FormInput
                     value={pass1}
                     label={"Password"}
+                    errorMsg={passerr}
                     onChange={(value) => {
+                        utils.validatePassword(pass, value, setPasserr)
+
                         setPass1(value)
                     }}
                     placeholder={"Enter Password"}
-                    secureTextEntry={show}
+                    secureTextEntry={!show}
                     containerStyle={{
                         marginTop: 15
                     }}
@@ -102,23 +185,38 @@ export default function Register({
                         </TouchableOpacity>
                     }
                 />
-                
+
             </View>
-            <TextButton label={"Signup"} />
+            <TextButton label={"Signup"}
+                onPress={() => {
+                    signup()
+                }}
+            />
             <Text style={{
                 color: COLORS.text,
                 ...FONTS.body4,
+                alignSelf: "center",
+                marginTop: 10,
+                marginBottom: 40
+
+            }}> Already have an account?
+            <TouchableOpacity 
+            style={{
+                justifyContent: "center",
                 alignSelf:"center",
-                marginTop:15
-            }}> Already have an account?<TouchableOpacity onPress={()=>{
+            }}
+            onPress={() => {
                 navigation.navigate('Login')
             }}>
-                <Text style={{
-                color: COLORS.purple,
-                ...FONTS.body4,
-                justifyContent:"center",
-            }}> Login</Text>
+                    <Text style={{
+                        color: COLORS.purple,
+                        ...FONTS.body4,
+                        
+
+                    }}> Login</Text>
                 </TouchableOpacity></Text>
-        </View>
+            <Toast ref={(ref) => { Toast.setRef(ref) }} config={toastConfig} />
+
+        </ScrollView>
     )
 }
