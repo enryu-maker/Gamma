@@ -9,7 +9,8 @@ export const Gamma = [
         img:IMAGE.Gamma1,
         L1:"AI for Improving Your",
         L2:"Grammer",
-        L3:"Start Conversation With Zero"
+        L3:"Start Conversation With Zero",
+        Use:"Start sentence with text \n *Correct grammer of {Your Sentence}*"
     },
     {
         id:2,
@@ -17,7 +18,19 @@ export const Gamma = [
         img:IMAGE.Gamma2,
         L1:"AI for Improving Your",
         L2:"Conversation Skills",
-        L3:"Start Conversation With One"
+        L3:"Start Conversation With One",
+        Use:""
+    },
+    {
+        id:3,
+        name:'Gamma-2',
+        img:IMAGE.Gamma1,
+        L1:"AI for",
+        L2:"Translation",
+        L3:"Start Conversation With Two",
+        Use:"Start sentence with following text \n *Translate {sentence} in {lang}*"
+
+
     }
 ]
 export const AssesmentData = [

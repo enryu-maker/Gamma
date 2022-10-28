@@ -120,6 +120,13 @@ export default function HomePage({
             <View style={{
                 justifyContent: "space-evenly"
             }}>
+                <Text style={{
+                        ...FONTS.h3,
+                        alignSelf: "center",
+                        color: COLORS.purple
+                    }}>
+                        {data.Use}
+                    </Text>
                 <Image source={data.img} style={{
                     height: 200,
                     width: 200,

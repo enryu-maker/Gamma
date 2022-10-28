@@ -18,6 +18,9 @@ export default function Register({
     const [emailerr, setEmailerrr] = React.useState("")
 
     const [username, setUsername] = React.useState("")
+    const [first, setFirst] = React.useState("")
+    const [last, setLast] = React.useState("")
+
     const [pass, setPass] = React.useState("")
     const [passerr, setPasserr] = React.useState("")
 
@@ -36,7 +39,8 @@ export default function Register({
                     email: email,
                     username: username,
                     password: pass,
-                    // password1: pass1,
+                    first_name:first,
+                    last_name:last
                 },
                 {
                     headers: {
@@ -54,7 +58,7 @@ export default function Register({
                         setLoading(false)
                     } else {
                         Toast.show({
-                            text1: 'User Not Registered',
+                            text1: 'Something Went Wrong',
                             type: 'error'
                         });
                         setLoading(false);
@@ -64,7 +68,7 @@ export default function Register({
                     console.log(error)
                     if (error.response) {
                         Toast.show({
-                            text1: 'Invalid Email & Password',
+                            text1: 'User Already exist',
                             type: 'error'
                         });
                         setLoading(false);
@@ -118,6 +122,28 @@ export default function Register({
                         setUsername(value)
                     }}
                     placeholder={"Enter Username"}
+                    containerStyle={{
+                        marginTop: 15
+                    }}
+                />
+                <FormInput
+                    value={first}
+                    label={"First Name"}
+                    onChange={(value) => {
+                        setFirst(value)
+                    }}
+                    placeholder={"Enter First Name"}
+                    containerStyle={{
+                        marginTop: 15
+                    }}
+                />
+                <FormInput
+                    value={last}
+                    label={"Last Name"}
+                    onChange={(value) => {
+                        setLast(value)
+                    }}
+                    placeholder={"Enter Last Name"}
                     containerStyle={{
                         marginTop: 15
                     }}
@@ -200,18 +226,18 @@ export default function Register({
                 marginBottom: 40
 
             }}> Already have an account?
-            <TouchableOpacity 
-            style={{
-                justifyContent: "center",
-                alignSelf:"center",
-            }}
-            onPress={() => {
-                navigation.navigate('Login')
-            }}>
+                <TouchableOpacity
+                    style={{
+                        justifyContent: "center",
+                        alignSelf: "center",
+                    }}
+                    onPress={() => {
+                        navigation.navigate('Login')
+                    }}>
                     <Text style={{
                         color: COLORS.purple,
                         ...FONTS.body4,
-                        
+
 
                     }}> Login</Text>
                 </TouchableOpacity></Text>

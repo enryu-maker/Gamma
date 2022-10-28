@@ -82,7 +82,7 @@ export default function Login({
                 keyboardShouldPersistTaps="handled"
                 contentContainerStyle={{
                     marginTop: SIZES.radius,
-                    paddingHorizontal: SIZES.padding,
+                    // paddingHorizontal: SIZES.padding,
                     paddingBottom: 30
                 }}>
             <Header />
@@ -165,7 +165,7 @@ export default function Login({
                 color: COLORS.text,
                 ...FONTS.body4,
                 alignSelf:"center",
-                marginTop:15
+                marginBottom:55
             }}> Don't have an account?<TouchableOpacity onPress={()=>{
                 navigation.navigate('Register')
             }}>

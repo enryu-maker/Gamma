@@ -19,7 +19,7 @@ export const toastConfig = {
   success: (props) => (
     <BaseToast
       {...props}
-      style={{ borderLeftColor: COLORS.Primary }}
+      style={{ borderLeftColor: COLORS.purple }}
       contentContainerStyle={{ paddingHorizontal: SIZES.padding }}
       text1Style={{
         ...FONTS.body3,
