@@ -6,6 +6,7 @@ import { IMAGE } from '../../../Theme/Image'
 import Voice from '@react-native-voice/voice';
 import TextCard from '../../../Component/TextCard'
 import { useTranslation } from 'react-i18next'
+import Tts from 'react-native-tts'
 import axios from 'axios'
 import axiosIns, { baseURL } from '../../../helpers/helpers'
 import { ActivityIndicator } from 'react-native-paper'
@@ -14,32 +15,52 @@ export default function HomePage({
     route
 }) {
     const { t } = useTranslation()
+    const handleVoice =  ttstext =>{
+
+        Platform.OS==='ios'?
+        
+        Tts.speak(ttstext, {
+            iosVoiceId:'com.apple.ttsbundle.Samantha-compact',
+            rate: 0.5,
+          })
+          :Tts.speak(ttstext, 
+            {
+                 androidParams: { 
+                    KEY_PARAM_PAN: -1,
+                    KEY_PARAM_VOLUME: 0.5, 
+                    KEY_PARAM_STREAM: 'STREAM_VOICE_CALL' ,
+                } 
+        
+        });
+        
+    }
     const [data, setData] = React.useState({})
     const [loading, setLoading] = React.useState(false);
-
-
     const [isRecord, setIsRecord] = React.useState(false);
     const [text, setText] = React.useState('');
     const [textList, setTextList] = React.useState([]);
     const buttonLabel = isRecord ? 'Stop' : 'Start';
     async function converse(d, id) {
         await axiosIns.post(baseURL + '/converse/', d).then((Response) => {
-            let data = {}
-            data['id'] = id + 1
-            data['text'] = Response.data['output'].trim();
-            data['type'] = true
-            textList.push(data)
-            data={}
+            console.log(Response.data)
+            // Tts.speak(Response.data['output'].trim());
+            handleVoice(Response.data['output'].trim())
+            let dataValue = {}
+            dataValue['id'] = id + 1
+            dataValue['text'] = Response.data['output'].trim();
+            dataValue['type'] = true
+            setTextList([...textList, dataValue])
+            dataValue={}
         }).catch((e) => {
             console.log(e)
         })
+        
     }
     const startLabel = isRecord
         ? t('Listening...')
         : t('Press Start Button');
     const _onSpeechStart = () => {
         console.log("start")
-
         setText('');
     };
     const _onSpeechEnd = () => {
@@ -60,7 +81,7 @@ export default function HomePage({
                 d['text'] = text
                 d['type'] = false
                 textList.push(d)
-                converse(d, textList.length + 1)
+                converse(d, textList.length)
             }
 
         } else {
@@ -120,7 +141,7 @@ export default function HomePage({
             <View style={{
                 justifyContent: "space-evenly"
             }}>
-                <Text style={{
+                {/* <Text style={{
                         ...FONTS.h3,
                         alignSelf: "center",
                         color: COLORS.purple
@@ -128,20 +149,21 @@ export default function HomePage({
                         {data.Use}
                     </Text>
                 <Image source={data.img} style={{
-                    height: 200,
-                    width: 200,
+                    height: 150,
+                    width: 150,
                     alignSelf: "center",
-                }} />
+                    marginBottom:10
+                }} /> */}
 
                 <View style={{
                     // marginTop: 15,
-                    height: 350,
+                    height: 400,
                     width: "88%",
                     borderRadius: SIZES.padding,
                     alignSelf: "center",
                 }}>
                     <Text style={{
-                        ...FONTS.h3,
+                        ...FONTS.h4,
                         alignSelf: "center",
                         color: COLORS.purple
                     }}>
@@ -149,7 +171,7 @@ export default function HomePage({
                     </Text>
                     <View style={{
                         height: "auto",
-                        maxHeight: 350,
+                        maxHeight: 390,
                         width: "100%",
                         // backgroundColor:COLORS.purple
                     }}>
@@ -168,7 +190,7 @@ export default function HomePage({
                     loading ? <ActivityIndicator color={COLORS.purple} size={"small"} /> :
 
                         <TouchableOpacity style={{
-                            marginBottom: SIZES.height > 700 ? 0 : 150,
+                            marginBottom: SIZES.height > 700 ? 0 : 100,
                         }} onPress={_onRecordVoice}>
                             <Image source={IMAGE.siri} style={{
                                 height: 120,

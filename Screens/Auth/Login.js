@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image } from 'react-native'
+import { View, Text, TouchableOpacity, Image, Platform } from 'react-native'
 import React from 'react'
 import { COLORS, FONTS, SIZES } from '../../Theme/Theme'
 import Header from '../../Component/Header'
@@ -17,6 +17,8 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 export default function Login({
     navigation
 }) {
+
+    
     const [email, setEmail] = React.useState("")
     const [pass, setPass] = React.useState("")
     const [show, setShow] = React.useState(false)
@@ -156,6 +158,7 @@ export default function Login({
                 </TouchableOpacity>
                 <TextButton label={"Login"} 
             onPress={()=>{
+                
                 login()
             }}
             />

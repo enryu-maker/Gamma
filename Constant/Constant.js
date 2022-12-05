@@ -4,16 +4,7 @@ import { COLORS } from "../Theme/Theme";
 import { useTranslation } from 'react-i18next';
 export const Gamma = [
     {
-        id:1,
-        name:'Gamma-0',
-        img:IMAGE.Gamma1,
-        L1:"AI for Improving Your",
-        L2:"Grammer",
-        L3:"Start Conversation With Zero",
-        Use:"Start sentence with text \n *Correct grammer of {Your Sentence}*"
-    },
-    {
-        id:2,
+        id:0,
         name:'Gamma-1',
         img:IMAGE.Gamma2,
         L1:"AI for Improving Your",
@@ -22,16 +13,27 @@ export const Gamma = [
         Use:""
     },
     {
-        id:3,
+        id:1,
         name:'Gamma-2',
         img:IMAGE.Gamma1,
         L1:"AI for",
         L2:"Translation",
         L3:"Start Conversation With Two",
-        Use:"Start sentence with following text \n *Translate {sentence} in {lang}*"
+        Use:"Start sentence with following text \n *Translate {sentence} in {lang}*",
+        Lang:true
 
 
-    }
+    },
+    {
+        id:2,
+        name:'Gamma-3',
+        img:IMAGE.Gamma1,
+        L1:"AI for Improving Your",
+        L2:"Grammer",
+        L3:"Start Conversation With Three",
+        Use:"Start sentence with text \n *Correct grammer of {Your Sentence}*"
+    },
+    
 ]
 export const AssesmentData = [
     {
