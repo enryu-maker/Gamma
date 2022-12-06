@@ -6,6 +6,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import BottomTab from './BottomTab';
 import SettingPages from '../Home/SettingPages/SettingPages';
 import HomePage from '../Home/HomeContent/HomePage';
+import Test from '../Home/Test';
+import Result from '../Home/SettingPages/Result';
 export default function HomeNav() {
     const Stack = createNativeStackNavigator()
     return (
@@ -25,6 +27,10 @@ export default function HomeNav() {
                     <Stack.Screen name="/" component={BottomTab} />
                     <Stack.Screen name="settingpage" component={SettingPages} />
                     <Stack.Screen name="homepage" component={HomePage} />
+                    <Stack.Screen name="test" component={Test} />
+                    <Stack.Screen name="result" component={Result} />
+
+
                 </Stack.Navigator>
             </NavigationContainer>
         </View>

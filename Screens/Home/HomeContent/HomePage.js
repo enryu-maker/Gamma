@@ -15,24 +15,32 @@ export default function HomePage({
     route
 }) {
     const { t } = useTranslation()
-    const handleVoice =  ttstext =>{
+    const handleVoice = ttstext => {
+        Tts.getInitStatus().then(() => {
+            Platform.OS === 'ios' ?
 
-        Platform.OS==='ios'?
-        
-        Tts.speak(ttstext, {
-            iosVoiceId:'com.apple.ttsbundle.Samantha-compact',
-            rate: 0.5,
-          })
-          :Tts.speak(ttstext, 
-            {
-                 androidParams: { 
-                    KEY_PARAM_PAN: -1,
-                    KEY_PARAM_VOLUME: 0.5, 
-                    KEY_PARAM_STREAM: 'STREAM_VOICE_CALL' ,
-                } 
-        
+                Tts.speak(ttstext, {
+                    iosVoiceId: 'com.apple.ttsbundle.Moira-compact',
+                    rate: 0.5,
+                })
+                : Tts.speak(ttstext,
+                    {
+                        androidParams: {
+                            KEY_PARAM_PAN: -1,
+                            KEY_PARAM_VOLUME: 0.5,
+                            KEY_PARAM_STREAM: 'STREAM_DTMF',
+                        }
+
+                    })
+        }).catch((err) => {
+            if (err.code === 'no_engine') {
+                Tts.requestInstallEngine();
+            }
+            else {
+                console.log(err)
+            }
         });
-        
+
     }
     const [data, setData] = React.useState({})
     const [loading, setLoading] = React.useState(false);
@@ -50,11 +58,11 @@ export default function HomePage({
             dataValue['text'] = Response.data['output'].trim();
             dataValue['type'] = true
             setTextList([...textList, dataValue])
-            dataValue={}
+            dataValue = {}
         }).catch((e) => {
             console.log(e)
         })
-        
+
     }
     const startLabel = isRecord
         ? t('Listening...')
@@ -121,6 +129,7 @@ export default function HomePage({
                         justifyContent: "center"
                     }}
                         onPress={() => {
+                            Tts.stop()
                             navigation.goBack()
                         }}
                     >
@@ -139,7 +148,7 @@ export default function HomePage({
                 }}
             />
             <View style={{
-                justifyContent: "space-evenly"
+                justifyContent: "space-between"
             }}>
                 {/* <Text style={{
                         ...FONTS.h3,
@@ -190,8 +199,10 @@ export default function HomePage({
                     loading ? <ActivityIndicator color={COLORS.purple} size={"small"} /> :
 
                         <TouchableOpacity style={{
-                            marginBottom: SIZES.height > 700 ? 0 : 100,
-                        }} onPress={_onRecordVoice}>
+                        }} onPress={() => {
+                            _onRecordVoice()
+                            Tts.stop()
+                        }}>
                             <Image source={IMAGE.siri} style={{
                                 height: 120,
                                 width: 120,

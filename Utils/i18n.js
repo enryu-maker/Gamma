@@ -26,6 +26,7 @@ i18n.use(initReactI18next).init({
         'Start Conversation With One':'Start Conversation With One',
         'Grammer':'Grammer',
         'Start Conversation With Zero':'Start Conversation With Zero',
+        "Start Test":"Start Test"
       },
     },
     fr: {
@@ -42,11 +43,14 @@ i18n.use(initReactI18next).init({
         'Stop': 'Arrêt',
         'Listening':'Écoute',
         'Difficulty':'Difficulté',
+        'AI for Translation':'AI pour la traduction',
+        'Start Conversation With Two':'Commencer la conversation avec Deux',
         'AI for Improving Your':'AI pour améliorer votre',
         'Conversation Skills':'Compétences de conversation',
         'Start Conversation With One':'Commencer la conversation avec One',
-        'Start Conversation With Zero':'Commencer la conversation avec Zero',
+        'Start Conversation With Three':'Commencer la conversation avec Trois',
         'Grammer':'Grammaire',
+        "Start Test":"Commencer le test"
       },
     }
   },

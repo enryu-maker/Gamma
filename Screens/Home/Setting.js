@@ -25,7 +25,7 @@ export default function Setting() {
       }}>
         <FlatList 
         data={settingData}
-        keyExtractor={(item)=>item.id}
+        // keyExtractor={(item)=>item.id}
         renderItem={({ item, index }) => {
           return(
             <InfoItem key={index} title={t(item.name)} 

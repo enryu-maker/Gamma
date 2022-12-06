@@ -13,19 +13,20 @@ export default function BigCard({
 }) {
     return (
         <View style={{
-            height: SIZES.height>700?SIZES.height * 0.60:SIZES.height * 0.70,
+            // height: SIZES.height>700?SIZES.height * 0.60:SIZES.height * 0.70,
             width:SIZES.width-30,
             backgroundColor: COLORS.card,
             borderRadius: SIZES.padding,
             alignSelf: "center",
             justifyContent:"space-evenly",
-            margin:15
+            margin:15,
         }}>
-            <View>
+            <View style={{
+            }}>
 
             <Image source={img} style={{
-                height: 250,
-                width: 250,
+                height: 200,
+                width: 200,
                 alignSelf: "center",
             }} />
             <Text style={{
@@ -40,19 +41,19 @@ export default function BigCard({
             <View>
                 <Text style={{
                     ...FONTS.body2,
-                    alignSelf:"center"
+                textAlign:"center"
                 }}>
                    {L1}
                 </Text>
                 <Text style={{
                     ...FONTS.body2,
-                    alignSelf:"center"
+                    textAlign:"center"
                 }}>
                     {L2}
                 </Text>
                 <Text style={{
                     ...FONTS.body2,
-                    alignSelf:"center"
+                    textAlign:"center"
                 }}>
                    {L3}
                 </Text>

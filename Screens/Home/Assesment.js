@@ -5,33 +5,23 @@ import Header from '../../Component/Header'
 import Card from '../../Component/Card'
 import { AssesmentData } from '../../Constant/Constant'
 
-export default function Assesment() {
+export default function Assesment({
+  navigation
+}) {
   return (
     <View style={{
       flex: 1,
       backgroundColor: COLORS.background
     }}>
       <Header title={"Assesment"} />
-      <Text style={{
-        ...FONTS.h1,
-        alignSelf: "center",
-        color: COLORS.purple
-      }}>
-        ~~Coming Soon~~
-      </Text>
-      <FlatList
-        data={AssesmentData}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item, index }) => {
-          return (
-            <Card
-              key={item.id}
-              name={item.name}
-              diff={item.diff}
-            />
-          )
-        }} />
       
+            <Card
+              key={0}
+              name={"Start Test"}
+              onPress={() => navigation.navigate("test")}
+              // diff={"Easy"}
+            />
+         
     </View>
   )
 }

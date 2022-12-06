@@ -13,13 +13,11 @@ export default function CircleButton({
   return (
     <TouchableOpacity style={{
         // outer
-        height:100,
-        width:100,
+        height:80,
+        width:80,
         alignSelf:"center",
         backgroundColor:COLORS.purple,
         borderRadius:60,
-        // borderWidth:1,
-        // borderColor:COLORS.border,
         justifyContent:"center",
         ...outerStyle
     }}
@@ -27,8 +25,8 @@ export default function CircleButton({
     >
         <View style={{
         // inner
-        height:70,
-        width:70,
+        height:60,
+        width:60,
         alignSelf:"center",
         backgroundColor:COLORS.background,
         borderRadius:45,

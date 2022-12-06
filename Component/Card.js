@@ -32,7 +32,7 @@ export default function Card({
             }}>
                 {name}
             </Text>
-            <Text style={{
+            {/* <Text style={{
                 ...FONTS.body3,
                 alignSelf: "flex-start",
                 justifyContent:"center",
@@ -45,7 +45,7 @@ export default function Card({
                     borderRadius:5,
                     alignSelf:"center"
                 }}/>
-            </Text>
+            </Text> */}
             </View>
 
             <CircleButton 

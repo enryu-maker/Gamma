@@ -19,7 +19,7 @@ export default function TextCard({
     }}>
       <Text style={{
         ...FONTS.body3,
-        alignSelf:"center"
+        alignSelf:"center",
       }}>{msg}</Text>
     </View>
   )
