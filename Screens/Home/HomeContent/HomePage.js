@@ -10,17 +10,20 @@ import Tts from 'react-native-tts'
 import axios from 'axios'
 import axiosIns, { baseURL } from '../../../helpers/helpers'
 import { ActivityIndicator } from 'react-native-paper'
+import Toast from 'react-native-toast-message'
+import { toastConfig } from '../../../App'
 export default function HomePage({
     navigation,
     route
 }) {
+    const [loading, setLoading] = React.useState(false);
     const { t } = useTranslation()
     const handleVoice = ttstext => {
-        Tts.getInitStatus().then(() => {
+        
             Platform.OS === 'ios' ?
 
                 Tts.speak(ttstext, {
-                    iosVoiceId: 'com.apple.ttsbundle.Moira-compact',
+                    iosVoiceId: 'com.apple.ttsbundle.Samantha-compact',
                     rate: 0.5,
                 })
                 : Tts.speak(ttstext,
@@ -32,27 +35,50 @@ export default function HomePage({
                         }
 
                     })
+        
+
+    }
+    React.useEffect(() => {
+        setLoading(true)
+        Tts.getInitStatus().then(() => {
+            setLoading(false)
+            Toast.show({
+                text1: 'Gamma is Ready',
+                type: 'success'
+            });
+            handleVoice('Gamma is Ready')
         }).catch((err) => {
             if (err.code === 'no_engine') {
                 Tts.requestInstallEngine();
+                Toast.show({
+                    text1: 'Gamma Engine Cannot connect',
+                    type: 'error'
+                });
+            setLoading(false)
+
             }
             else {
-                console.log(err)
+                Toast.show({
+                    text1: 'Error',
+                    type: 'error'
+                });
+            setLoading(false)
+
             }
         });
-
-    }
+    }, [])
     const [data, setData] = React.useState({})
-    const [loading, setLoading] = React.useState(false);
+    // const [loading, setLoading] = React.useState(false);
     const [isRecord, setIsRecord] = React.useState(false);
     const [text, setText] = React.useState('');
     const [textList, setTextList] = React.useState([]);
     const buttonLabel = isRecord ? 'Stop' : 'Start';
     async function converse(d, id) {
         await axiosIns.post(baseURL + '/converse/', d).then((Response) => {
-            console.log(Response.data)
-            // Tts.speak(Response.data['output'].trim());
-            handleVoice(Response.data['output'].trim())
+            let regex = /\?/g;
+            let result = Response.data['output'].replace(regex, " ");
+            console.log(result)
+            handleVoice(result.trim())
             let dataValue = {}
             dataValue['id'] = id + 1
             dataValue['text'] = Response.data['output'].trim();
@@ -147,26 +173,32 @@ export default function HomePage({
                     marginLeft: -65
                 }}
             />
-            <View style={{
-                justifyContent: "space-between"
-            }}>
-                {/* <Text style={{
-                        ...FONTS.h3,
-                        alignSelf: "center",
-                        color: COLORS.purple
+            {
+                loading ?
+                    <View style={{
+                        flex: 1,
+                        justifyContent: "center",
+                        alignItems: "center"
                     }}>
-                        {data.Use}
-                    </Text>
-                <Image source={data.img} style={{
-                    height: 150,
-                    width: 150,
-                    alignSelf: "center",
-                    marginBottom:10
-                }} /> */}
+                        <ActivityIndicator size="large" color={COLORS.purple} />
+                        <Text style={{
+                            ...FONTS.h4,
+                            color: COLORS.purple
+                        }}>
+                            Connecting...
+                        </Text>
+                    </View> 
+                    :
+            <View style={{
+                flex: 1,
+                justifyContent: "space-evenly",
+            }}>
+                
 
                 <View style={{
                     // marginTop: 15,
-                    height: 400,
+                    height: "auto",
+                    // maxHeight: 390,
                     width: "88%",
                     borderRadius: SIZES.padding,
                     alignSelf: "center",
@@ -180,7 +212,7 @@ export default function HomePage({
                     </Text>
                     <View style={{
                         height: "auto",
-                        maxHeight: 390,
+                        maxHeight: 450,
                         width: "100%",
                         // backgroundColor:COLORS.purple
                     }}>
@@ -195,8 +227,7 @@ export default function HomePage({
                     </View>
 
                 </View>
-                {
-                    loading ? <ActivityIndicator color={COLORS.purple} size={"small"} /> :
+                
 
                         <TouchableOpacity style={{
                         }} onPress={() => {
@@ -210,15 +241,19 @@ export default function HomePage({
                             }} />
                             <Text style={{
                                 alignSelf: "center",
-                                marginTop: -20,
+                                // marginTop: -20,
                                 ...FONTS.h3,
                                 color: COLORS.text
                             }}>
                                 {t(buttonLabel)}
                             </Text>
                         </TouchableOpacity>
-                }
+
             </View>
+            
+}
+<Toast ref={(ref) => { Toast.setRef(ref) }} config={toastConfig} />
+
         </View>
     )
 }
