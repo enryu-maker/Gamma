@@ -17,6 +17,8 @@ export default function HomePage({
     route
 }) {
     const [loading, setLoading] = React.useState(false);
+    const [label, setLabel] = React.useState("");
+
     const { t } = useTranslation()
     const handleVoice = ttstext => {
         
@@ -35,18 +37,16 @@ export default function HomePage({
                         }
 
                     })
-        
-
     }
     React.useEffect(() => {
         setLoading(true)
         Tts.getInitStatus().then(() => {
             setLoading(false)
             Toast.show({
-                text1: 'Gamma is Ready',
+                text1: 'Hello, how are you?',
                 type: 'success'
             });
-            handleVoice('Gamma is Ready')
+            handleVoice('Hello, how are you?')
         }).catch((err) => {
             if (err.code === 'no_engine') {
                 Tts.requestInstallEngine();
@@ -55,7 +55,6 @@ export default function HomePage({
                     type: 'error'
                 });
             setLoading(false)
-
             }
             else {
                 Toast.show({
@@ -94,6 +93,7 @@ export default function HomePage({
         ? t('Listening...')
         : t('Press Start Button');
     const _onSpeechStart = () => {
+        setLabel("Dites bonjour, comment allez-vous")
         console.log("start")
         setText('');
     };
@@ -196,13 +196,18 @@ export default function HomePage({
                 
 
                 <View style={{
-                    // marginTop: 15,
                     height: "auto",
-                    // maxHeight: 390,
                     width: "88%",
                     borderRadius: SIZES.padding,
                     alignSelf: "center",
                 }}>
+                    <Text style={{
+                        ...FONTS.h4,
+                        alignSelf: "center",
+                        color: COLORS.purple
+                    }}>
+                        {label}
+                    </Text>
                     <Text style={{
                         ...FONTS.h4,
                         alignSelf: "center",
@@ -214,7 +219,6 @@ export default function HomePage({
                         height: "auto",
                         maxHeight: 450,
                         width: "100%",
-                        // backgroundColor:COLORS.purple
                     }}>
                         <FlatList
                             data={textList}
