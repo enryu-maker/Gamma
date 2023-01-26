@@ -29,7 +29,7 @@ export const Gamma = [
         name:'Gamma-3',
         img:IMAGE.Gamma1,
         L1:"AI for Improving Your",
-        L2:"Grammer",
+        L2:"Grammar",
         L3:"Start Conversation With Three",
         Use:"Start sentence with text \n *Correct grammer of {Your Sentence}*"
     },
