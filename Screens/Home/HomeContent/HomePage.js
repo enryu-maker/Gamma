@@ -93,7 +93,7 @@ export default function HomePage({
         ? t('Listening...')
         : t('Press Start Button');
     const _onSpeechStart = () => {
-        setLabel("Dites bonjour, comment allez-vous")
+        setLabel("Dites Hello, how are you")
         console.log("start")
         setText('');
     };
