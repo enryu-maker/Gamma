@@ -92,7 +92,8 @@ export default function HomePage({
     const startLabel = isRecord
         ? t('Listening...')
         : t('Press Start Button');
-    const _onSpeechStart = () => {
+    const _onSpeechStart = (event) => {
+        console.log(event)
         setLabel("Dites Hello, how are you")
         console.log("start")
         setText('');
